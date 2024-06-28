@@ -6,11 +6,13 @@ export type ScaffoldConfig = {
   alchemyApiKey: string;
   walletConnectProjectId: string;
   onlyLocalBurnerWallet: boolean;
+  websiteName?: string;
+  websiteDomain?: string;
 };
 
 const scaffoldConfig = {
   // The networks on which your DApp is live
-  targetNetworks: [chains.hardhat],
+  targetNetworks: [chains.mainnet],
 
   // The interval at which your front-end polls the RPC servers for new data
   // it has no effect if you only target the local network (default is 4000)
@@ -30,6 +32,12 @@ const scaffoldConfig = {
 
   // Only show the Burner Wallet when running on hardhat network
   onlyLocalBurnerWallet: true,
+
+  // The name of your website, used for passkeys
+  websiteName: "Passkeys Example",
+
+  // The domain of your website, used for passkeys
+  websiteDomain: "passkeys-tan.vercel.app",
 } as const satisfies ScaffoldConfig;
 
 export default scaffoldConfig;
