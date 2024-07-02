@@ -1,3 +1,27 @@
+# Authentication using passkeys (WebAuthn)
+
+[WebAuthn](https://w3c.github.io/webauthn/) defines a way to authenticate users using public key-based credentials. It allows servers to integrate with the strong authenticators now built into devices, like Android's Fingerprint Unlock, Windows Hello, or Apple’s Touch ID. Instead of a password, a private-public key pair (known as a credential) is created for a website. The private key is stored securely on the user’s device; a public key and randomly generated credential ID are sent to the server for storage. The server can then use that public key to prove the user’s identity (https://webauthn.guide/).
+
+It was integrated to SE-2 using [SimpleWebAuthn](https://simplewebauthn.dev/)
+
+## Signup
+
+First, the user needs to signup.
+
+The frontend first asks for credential options and then requests the registration. The user approves the sign-up with the same biometric or PIN that the user has to unlock the device. (https://github.com/damianmarti/passkey/blob/main/packages/nextjs/app/register/page.tsx)
+
+The backend sends the credential options, saves the challenge, and then verifies that the challenge was signed by the user. If it's ok, the credentials are saved. The credential does not include the user's private key, only the public key. (https://github.com/damianmarti/passkey/blob/main/packages/nextjs/app/api/passkeys/register/route.ts)
+
+## Login
+
+For the login, the frontend asks for the login options and then starts the authentication, asking the user to use an unlock device option. (https://github.com/damianmarti/passkey/blob/main/packages/nextjs/app/login/page.tsx)
+
+The backend verifies the login using the saved credentials and the credentials sent from the frontend. (https://github.com/damianmarti/passkey/blob/main/packages/nextjs/app/api/passkeys/login/route.ts)
+
+## Testing website
+
+You can test signing up and logging in at https://passkeys-tan.vercel.app/register
+
 # 🏗 Scaffold-ETH 2
 
 <h4 align="center">
