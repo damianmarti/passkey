@@ -26,6 +26,12 @@ You have to change the ***websiteDomain*** at https://github.com/damianmarti/pas
 
 You can test signing up and logging in at https://passkeys-tan.vercel.app/register
 
+## Testing website with WebAuthn emulator
+
+You can enable the WebAuthn emulator on Chrome. Please follow this tutorial https://developer.chrome.com/docs/devtools/webauthn
+
+A good option to use passkey on devices without it is using [KeePassXC](https://keepassxc.org/) and then installing the Chrome extension .
+
 # 🏗 Scaffold-ETH 2
 
 <h4 align="center">
