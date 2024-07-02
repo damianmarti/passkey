@@ -71,7 +71,7 @@ const LoginWithPasskey = () => {
           <button onClick={loginWithPasskey} className="btn btn-primary m-4">
             Login with Passkey
           </button>
-          <a href="/register">Register</a>
+          <a href="/register">Signup</a>
         </div>
         <div className="m-4">{message}</div>
       </div>

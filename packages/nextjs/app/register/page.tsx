@@ -52,7 +52,7 @@ const RegisterPasskey = () => {
             className="border-2 border-gray-300 rounded-md p-2 m-2 w-40"
           />
           <button onClick={handleRegister} className="btn btn-primary mr-4">
-            Register with Passkey
+            Signup with Passkey
           </button>
           <a href="/login">Login</a>
         </div>

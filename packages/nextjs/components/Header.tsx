@@ -20,7 +20,7 @@ export const menuLinks: HeaderMenuLink[] = [
     href: "/",
   },
   {
-    label: "Register",
+    label: "Signup",
     href: "/register",
   },
   {
