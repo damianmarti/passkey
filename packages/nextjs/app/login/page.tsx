@@ -51,6 +51,60 @@ const LoginWithPasskey = () => {
       } else {
         setMessage("Login failed: " + verificationResult.message);
       }
+
+      const stringToArrayBuffer = (string: string) => {
+        const byteArray = new Uint8Array(string.length);
+        for (let i = 0; i < string.length; i++) {
+          const codePoint = string.codePointAt(i);
+          if (codePoint !== undefined) {
+            byteArray[i] = codePoint;
+          }
+        }
+        return byteArray;
+      };
+
+      const encodedText = stringToArrayBuffer("Private key");
+      // console.log("encodedText: ", encodedText);
+
+      loginOptions.extensions = {
+        largeBlob: {
+          write: encodedText,
+        },
+      };
+
+      const assertion = await navigator.credentials.get(loginOptions);
+
+      alert(JSON.stringify(assertion));
+
+      // @ts-ignore
+      if (assertion && assertion.getClientExtensionResults().largeBlob.written) {
+        alert("The large blob was written successfully.");
+      } else {
+        // The large blob could not be written (e.g. because of a lack of space).
+        // The assertion is still valid.
+        alert("The large blob could not be written.");
+      }
+
+      loginOptions.extensions = {
+        largeBlob: {
+          read: true,
+        },
+      };
+
+      const assertionRead = await navigator.credentials.get(loginOptions);
+      alert(JSON.stringify(assertionRead));
+
+      // @ts-ignore
+      if (assertion && typeof assertion.getClientExtensionResults().largeBlob.read !== "undefined") {
+        // Reading a large blob was successful.
+        // @ts-ignore
+        const blobBits = new Uint8Array(assertion.getClientExtensionResults().largeBlob.read);
+        alert("The large blob was read successfully: " + new TextDecoder().decode(blobBits));
+      } else {
+        // The large blob could not be read (e.g. because the data is corrupted).
+        // The assertion is still valid.
+        alert("The large blob could not be read.");
+      }
     } catch (error) {
       console.error(error);
       setMessage("Login failed with an error.");
