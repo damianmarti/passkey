@@ -18,6 +18,10 @@ For the login, the frontend asks for the login options and then starts the authe
 
 The backend verifies the login using the saved credentials and the credentials sent from the frontend. (https://github.com/damianmarti/passkey/blob/main/packages/nextjs/app/api/passkeys/login/route.ts)
 
+## Configuration
+
+You have to change the ***websiteDomain*** at https://github.com/damianmarti/passkey/blob/main/packages/nextjs/scaffold.config.ts#L40 to match your domain for WebAuthn be able to work.
+
 ## Testing website
 
 You can test signing up and logging in at https://passkeys-tan.vercel.app/register
